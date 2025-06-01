@@ -58,6 +58,14 @@ typedef struct
 	// [input]
 	u32 buttonMaps[10]; // A, B, Select, Start, Right, Left, Up, Down, R, L.
 
+	// [hotkeys]
+	u32 takeScreenshot;
+	u32 backlightUp;
+	u32 backlightDown;
+	u32 backlightOff;
+	u32 backlightOn;
+	u32 skipPatching;
+
 	// [game]
 	u8 saveSlot;
 	u8 saveType;

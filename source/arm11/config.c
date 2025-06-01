@@ -89,6 +89,14 @@ OafConfig g_oafConfig =
 		0  // L
 	},
 
+	// [hotkeys]
+	2052,     // takeScreenshot (SELECT+Y, hex: 805)
+	1088,     // backlightUp (X+UP, hex: 440)
+	1152,     // backlightDown (X+DOWN, hex: 480)
+	1056,     // backlightOff (X+LEFT, hex: 420)
+	1040,     // backlightOn (X+RIGHT, hex: 410)
+	1024,     // skipPatching (X, hex: 400)
+
 	// [game]
 	0,     // saveSlot
 	255,   // saveType
@@ -221,6 +229,29 @@ static int cfgIniCallback(void *user, const char *section, const char *name, con
 			const u32 shift = 31u - __builtin_clzl(button);
 			const u32 map   = parseButtons(value);
 			config->buttonMaps[shift] = map;
+		}
+	}
+	else if(strcmp(section, "hotkeys") == 0)
+	{
+		// get the button (combo) set for this hotkey
+		const u32 map = parseButtons(value);
+
+		// if map isn't zero...
+		if (map != 0)
+		{
+			// set the mapping to its corrisponding variable based on name
+			if(strcmp(name, "takeScreenshot") == 0)
+				config->takeScreenshot = map;
+			else if(strcmp(name, "backlightUp") == 0)
+				config->backlightUp = map;
+			else if(strcmp(name, "backlightDown") == 0)
+				config->backlightDown = map;
+			else if(strcmp(name, "backlightOff") == 0)
+				config->backlightOff = map;
+			else if(strcmp(name, "backlightOn") == 0)
+				config->backlightOn = map;
+			else if(strcmp(name, "skipPatching") == 0)
+				config->skipPatching = map;
 		}
 	}
 	else if(strcmp(section, "game") == 0)
