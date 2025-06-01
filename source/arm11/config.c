@@ -26,26 +26,28 @@
 
 
 #define INI_BUF_SIZE    (1024u)
-#define DEFAULT_CONFIG  "[general]\n"             \
-                        "backlight=64\n"          \
-                        "backlightSteps=5\n"      \
-                        "directBoot=false\n"      \
-                        "useGbaDb=true\n"         \
-                        "useSavesFolder=true\n\n" \
-                                                  \
-                        "[video]\n"               \
-                        "scaler=matrix\n"         \
-                        "colorProfile=none\n"     \
-                        "contrast=1.0\n"          \
-                        "brightness=0.0\n"        \
-                        "saturation=1.0\n\n"      \
-                                                  \
-                        "[audio]\n"               \
-                        "audioOut=auto\n"         \
-                        "volume=127\n\n"          \
-                                                  \
-                        "[advanced]\n"            \
-                        "saveOverride=false\n"    \
+#define DEFAULT_CONFIG  "[general]\n"                       \
+                        "backlight=64\n"                    \
+                        "backlightSteps=5\n"                \
+                        "directBoot=false\n"                \
+                        "useGbaDb=true\n"                   \
+                        "useSavesFolder=true\n"             \
+                        "enableBacklightHotkeys=true\n"     \
+                        "enableScreenshotHotkey=true\n\n"   \
+                                                            \
+                        "[video]\n"                         \
+                        "scaler=matrix\n"                   \
+                        "colorProfile=none\n"               \
+                        "contrast=1.0\n"                    \
+                        "brightness=0.0\n"                  \
+                        "saturation=1.0\n\n"                \
+                                                            \
+                        "[audio]\n"                         \
+                        "audioOut=auto\n"                   \
+                        "volume=127\n\n"                    \
+                                                            \
+                        "[advanced]\n"                      \
+                        "saveOverride=false\n"              \
                         "defaultSave=sram_256k"
 
 
@@ -59,6 +61,8 @@ OafConfig g_oafConfig =
 	false, // directBoot
 	true,  // useGbaDb
 	true,  // useSavesFolder
+	true,  // enableBacklightHotkeys
+	true,  // enableScreenshotHotkey
 
 	// [video]
 	2,     // scaler
@@ -148,6 +152,10 @@ static int cfgIniCallback(void *user, const char *section, const char *name, con
 			config->useGbaDb = (strcmp(value, "true") == 0 ? true : false);
 		else if(strcmp(name, "useSavesFolder") == 0)
 			config->useSavesFolder = (strcmp(value, "true") == 0 ? true : false);
+		else if(strcmp(name, "enableBacklightHotkeys") == 0)
+			config->enableBacklightHotkeys = (strcmp(value, "true") == 0 ? true : false);
+		else if(strcmp(name, "enableScreenshotHotkey") == 0)
+			config->enableScreenshotHotkey = (strcmp(value, "true") == 0 ? true : false);
 	}
 	else if(strcmp(section, "video") == 0)
 	{

@@ -364,7 +364,8 @@ void oafUpdate(void)
 	LGY11_setInputState(pressed);
 
 	CODEC_runHeadphoneDetection();
-	updateBacklight();
+	if (g_oafConfig.enableBacklightHotkeys)
+		updateBacklight();
 	waitForEvent(g_frameReadyEvent);
 	clearEvent(g_frameReadyEvent);
 }
